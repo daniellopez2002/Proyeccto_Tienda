@@ -17,8 +17,8 @@ public class Usuario {
      public String correo;
      public String contraseña;
 
-    public Usuario(int id, String nombre, String correo, String contraseña) {
-        this.id = id;
+    public Usuario(String nombre, String correo, String contraseña) {
+        this.id = Set_Id();
         this.nombre = nombre;
         this.correo = correo;
         this.contraseña = contraseña;
@@ -62,19 +62,23 @@ public class Usuario {
     
     //----------------------GENERAR_ID--------------------------------------------
     //El id del usuario es un concescutivo que generamos con este metodo
-    private int Set_Id(){
-        id = 0000;
+    public int Set_Id(){
+        id = 0;
         Bases b = new Bases();
         ArrayList<Usuario> usuarios = new ArrayList<>();
         boolean con = b.crear_conexion();
         if (con){
             usuarios = b.cargar_usuarios();
-            if(usuarios == null){
-                Usuario last = usuarios.get(usuarios.size()-1);
-                if (last.id == id){
-                    id += 1; 
+            for (int i = 0; i < usuarios.size(); i++) {
+                Usuario get = usuarios.get(i);
+                if (get.id == id){
+                    id +=1;
+                }else{
+                    return id;
                 }
+
             }
+            
             
         }
         return id;
@@ -82,8 +86,10 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Empleado{" + "nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", contrase\u00f1a=" + contraseña + '}';
     }
+
+
     
      
 }

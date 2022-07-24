@@ -237,12 +237,12 @@ public class Bases {
         String update = "update usuario set nombre = ?,"
                 + "correo=?,"
                 + "contrasena=?,"
-                + "imagenestudiante=? where nombre = ?";
+                + "imagenestudiante=? where id = ?";
         PreparedStatement preparedStmt = conexion.prepareStatement(update);
         preparedStmt.setString(1, usuariomod.getNombre());
         preparedStmt.setString(2, usuariomod.getCorreo());
         preparedStmt.setString(3, usuariomod.getContraseña());
-        preparedStmt.setString(4, usuariomod.getNombre());
+        preparedStmt.setString(4, String.valueOf(usuariomod.getId()));
         
         preparedStmt.executeUpdate();
         preparedStmt.close();
@@ -272,8 +272,8 @@ public class Bases {
     }
         
     //----------------------------------------ELIMINAR----------------------------------------
-    public boolean EliminarUsuario(String nombre) {
-        String sql = "DELETE FROM usuario WHERE nombre = "+nombre;
+    public boolean EliminarUsuario(String id) {
+        String sql = "DELETE FROM usuario WHERE id = "+id;
         try {
             Statement sentencia = conexion.createStatement();
             sentencia.executeUpdate(sql);

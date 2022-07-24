@@ -27,7 +27,9 @@ public class Main_BD {
         
         if (conexion) {
             System.out.println(" ¡Conexión exitosa! ");
-            boolean crea = objBases.crear_usuario("daniel", "pedro.lopez@gmail.com", "panAjo89");
+            Usuario un = new Usuario("lo", "lo", "lo");
+            System.out.println(String.valueOf(un.id));
+            boolean crea = objBases.crear_usuario(String.valueOf(un.id) ,"daniel", "pedro.lopez@gmail.com", "panAjo89");
             if (crea){
                 System.out.println("Si");
             }else{
