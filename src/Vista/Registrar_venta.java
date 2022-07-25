@@ -6,6 +6,7 @@ package Vista;
 
 import Bases.Bases;
 import Modelo.Producto;
+import Modelo.Usuario;
 import Modelo.Venta;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +23,9 @@ public class Registrar_venta extends javax.swing.JFrame {
     /**
      * Creates new form Registrar_Producto
      */
-    public Registrar_venta() {
+    Usuario user = new Usuario();
+    public Registrar_venta(Usuario us) {
+        user = us;
         initComponents();
         if (b.crear_conexion()){
             ventas = b.cargar_ventas();
@@ -283,10 +286,11 @@ public class Registrar_venta extends javax.swing.JFrame {
         // TODO add your handling code here:
         String valor_v = jTextField3.getText();
         String id_v = jTextField5.getText();
+        String id_p =jTextField4.getText();
         
         
         if (b.crear_conexion()){
-            boolean venta = b.crear_venta(valor_v, id_v);
+            boolean venta = b.crear_venta(id_v, String.valueOf(user.id), id_p, valor_v);
             if (venta){
                 JOptionPane.showConfirmDialog(rootPane, "SE REGISTRO UNA VENTA");
                 id += 1;
@@ -331,7 +335,7 @@ public class Registrar_venta extends javax.swing.JFrame {
 //----------------------------BOTON_VOLVER------------------------------------
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Ver_Productos vps = new Ver_Productos();
+        Ver_Productos vps = new Ver_Productos(user);
         vps.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -371,7 +375,7 @@ public class Registrar_venta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registrar_venta().setVisible(true);
+                new Registrar_venta(null).setVisible(true);
             }
         });
     }

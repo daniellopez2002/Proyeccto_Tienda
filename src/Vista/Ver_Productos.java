@@ -6,6 +6,7 @@ package Vista;
 
 import Bases.Bases;
 import Modelo.Producto;
+import Modelo.Usuario;
 import Modelo.Venta;
 import java.util.ArrayList;
 
@@ -18,7 +19,10 @@ public class Ver_Productos extends javax.swing.JFrame {
     /**
      * Creates new form Ver_Productos
      */
-    public Ver_Productos() {
+    
+    Usuario user = new Usuario();
+    public Ver_Productos(Usuario us) {
+        user = us;
         initComponents();
     }
     
@@ -180,7 +184,7 @@ public class Ver_Productos extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        Editar_Eliminar_Usuario u = new Editar_Eliminar_Usuario();
+        Editar_Eliminar_Usuario u = new Editar_Eliminar_Usuario(user);
         u.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
@@ -199,14 +203,14 @@ public class Ver_Productos extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        Editar_Eliminar_Producto p = new Editar_Eliminar_Producto();
+        Editar_Eliminar_Producto p = new Editar_Eliminar_Producto(user);
         p.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Registrar_venta rv = new Registrar_venta();
+        Registrar_venta rv = new Registrar_venta(user);
         rv.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -241,7 +245,7 @@ public class Ver_Productos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ver_Productos().setVisible(true);
+                new Ver_Productos(null).setVisible(true);
             }
         });
     }

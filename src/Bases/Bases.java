@@ -81,7 +81,7 @@ public class Bases {
             ps.setString(1, id);
             ps.setString(2, nombre);
             ps.setString(3, cantidad);
-            ps.setString(3, precio_unidad);
+            ps.setString(4, precio_unidad);
             ps.executeUpdate();
             conexion.commit();
             return true;
@@ -169,6 +169,29 @@ public class Bases {
         return ur;
     }
     
+    public Usuario buscarNombreUsuario_inicio(String buscarpor) throws IOException {
+        Usuario ur = new Usuario();
+        try {
+            ResultSet rs = st.executeQuery("SELECT * FROM usuario WHERE correo=" + buscarpor + "");
+            while (rs.next()) {
+                String id = rs.getObject("id").toString();
+                String nombre = rs.getObject("nombre").toString();
+                String correo = rs.getObject("correo").toString();
+                String contrasena = rs.getObject("contrasena").toString();
+                
+                ur.id = Integer.parseInt(id);                
+                ur.nombre = nombre;
+                ur.correo = correo;
+                ur.contraseña = contrasena;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Bases.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ur;
+    }
+    
     
     public ArrayList cargar_productos(){
         ArrayList<Producto> productos = new ArrayList<>();
@@ -177,7 +200,7 @@ public class Bases {
             ResultSet rs  = st.executeQuery(Sql);
             while (rs.next()){
                 Producto p = new Producto();
-                p.id_producto = Integer.parseInt(rs.getObject("id_producto").toString());
+                p.id_producto = Integer.parseInt(rs.getObject("id").toString());
                 p.nombre = rs.getObject("nombre").toString();
                 p.cantidad = Integer.parseInt(rs.getObject("cantidad").toString());
                 p.precio_unidad = Float.parseFloat(rs.getObject("precio_unidad").toString());

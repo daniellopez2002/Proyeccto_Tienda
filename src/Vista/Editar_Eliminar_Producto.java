@@ -6,6 +6,7 @@ package Vista;
 
 import Bases.Bases;
 import Modelo.Producto;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,8 +23,12 @@ import javax.swing.JOptionPane;
     /**
      * Creates new form Editar_Eliminar_Empleado
      */
-    public Editar_Eliminar_Producto() {
+     
+    Usuario user = new Usuario();
+    
+    public Editar_Eliminar_Producto(Usuario us) {
         initComponents();
+        user = us;
         
     }
     
@@ -269,7 +274,7 @@ import javax.swing.JOptionPane;
 //-------------BOTON_VOLVER-------------------------
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         Ver_Productos vps = new Ver_Productos();
+         Ver_Productos vps = new Ver_Productos(user);
          vps.setVisible(true);
          this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -298,28 +303,27 @@ import javax.swing.JOptionPane;
     //-------------BOTON_CREAR----------
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        productos = b.cargar_productos();
+        Boolean con = b.crear_conexion();
+        if (con){
+            productos = b.cargar_productos();
+        }
+        
         String id_p = jTextField1.getText();
         String nombre_p = jTextField2.getText();
         String cantidad = jTextField3.getText();
         String precio_unidad = jTextField4.getText();
-        for (Producto p:productos){
-            if (String.valueOf(p.id_producto)==id_p){
-                
-                if(b.crear_conexion()){
-            boolean f =b.crear_producto(id_p, nombre_p, cantidad, precio_unidad);
-            if (f){
-                JOptionPane.showConfirmDialog(rootPane, "SE CREO EL PRODUCTO");
+        for (int i = 0; i < productos.size(); i++) {
+            Producto get = productos.get(i);
+            if (get.id_producto != Integer.parseInt(id_p)){
+                boolean f =b.crear_producto(id_p, nombre_p, cantidad, precio_unidad);
+                if (f){
+                    System.out.println("SE CREO EL PRODUCTO");
+                    break;
+                }
             }else{
-                JOptionPane.showConfirmDialog(rootPane, "NO SE CREO EL PRODUCTO");
+                System.out.println("No se creo");
             }
-        }   
-            }else{
-                JOptionPane.showConfirmDialog(rootPane, "YA EXISTE EL PRODUCTO");
-            }
-            
-        }
-        
+        } 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -353,7 +357,7 @@ import javax.swing.JOptionPane;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Editar_Eliminar_Producto().setVisible(true);
+                new Editar_Eliminar_Producto(null).setVisible(true);
             }
         });
     }

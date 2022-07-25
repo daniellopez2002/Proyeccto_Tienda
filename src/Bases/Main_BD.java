@@ -4,6 +4,7 @@
  */
 package Bases;
 
+import Modelo.Producto;
 import Modelo.Usuario;
 import java.util.ArrayList;
 
@@ -20,25 +21,24 @@ public class Main_BD {
 
         Bases objBases = new Bases();
         boolean conexion;
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        ArrayList<Producto> productos = new ArrayList<>();
         
         //Establecer la conexión
         conexion = objBases.crear_conexion();
         
         if (conexion) {
             System.out.println(" ¡Conexión exitosa! ");
-            Usuario un = new Usuario("lo", "lo", "lo");
-            System.out.println(String.valueOf(un.id));
-            boolean crea = objBases.crear_usuario(String.valueOf(un.id) ,"daniel", "pedro.lopez@gmail.com", "panAjo89");
-            if (crea){
-                System.out.println("Si");
-            }else{
-                System.out.println("no");
-            }
-            usuarios = objBases.cargar_usuarios();
-            for (Usuario u:usuarios){
-                System.out.println(u.toString());
-            }
+////            boolean crea = objBases.crear_usuario(String.valueOf(un.id) ,"daniel", "pedro.lopez@gmail.com", "panAjo89");
+//            boolean crea = objBases.crear_producto("4", "maracuya", "30", "2000");
+//            if (crea){
+//                System.out.println("Si");
+//            }else{
+//                System.out.println("no");
+//            }
+//            productos = objBases.cargar_productos();
+//            for (Producto p:productos){
+//                System.out.println(p.toString());
+//            }
         } else {
             System.out.println(" ¡Conexión fallida! ");
         }

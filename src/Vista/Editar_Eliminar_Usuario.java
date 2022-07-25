@@ -23,7 +23,10 @@ public class Editar_Eliminar_Usuario extends javax.swing.JFrame {
     /**
      * Creates new form Editar_Eliminar_Empleado
      */
-    public Editar_Eliminar_Usuario() {
+    
+    Usuario user = new Usuario();
+    public Editar_Eliminar_Usuario(Usuario us) {
+        user = us;
         initComponents();
     }
     
@@ -261,7 +264,7 @@ public class Editar_Eliminar_Usuario extends javax.swing.JFrame {
 //--------------------------BOTON_VOLVER----------------------------------------------------------------
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Ver_Productos vps = new Ver_Productos();
+        Ver_Productos vps = new Ver_Productos(user);
         vps.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -303,7 +306,7 @@ public class Editar_Eliminar_Usuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Editar_Eliminar_Usuario().setVisible(true);
+                new Editar_Eliminar_Usuario(null).setVisible(true);
             }
         });
     }

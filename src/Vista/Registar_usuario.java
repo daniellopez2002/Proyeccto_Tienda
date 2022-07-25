@@ -182,22 +182,21 @@ public class Registar_usuario extends javax.swing.JFrame {
         String correo = jTextField3.getText();
         
         Usuario obju = new Usuario(nombre, correo, contrasena);
-        System.out.println(String.valueOf(obju.id));
+//        System.out.println(String.valueOf(obju.id));
         
-        jLabel6.setText(String.valueOf(obju.id));
-        if (b.crear_conexion()){
+        boolean con = b.crear_conexion();
+        
+        if (con){
             usuarios = b.cargar_usuarios();
-            for (Usuario u:usuarios){
-                if (u.nombre!=nombre){
-                    boolean f = b.crear_usuario(String.valueOf(obju.id), obju.nombre, obju.correo, obju.contraseña);
+            boolean f = b.crear_usuario(String.valueOf(obju.id), obju.nombre, obju.correo, obju.contraseña);
                     if(f){
-                        JOptionPane.showConfirmDialog(rootPane, "SE CREO EL USUARIO");
+                        System.out.println("se creo");
                 }else{
-                        JOptionPane.showConfirmDialog(rootPane, "NO SE CREO EL USUARIO");
+                        System.out.println("no se creo");
                     }
-                }
             }
-        }
+            
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
 //--------------------------BOTON_VOLVER----------------------------------------------------------------

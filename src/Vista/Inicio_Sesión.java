@@ -148,14 +148,14 @@ public class Inicio_Sesión extends javax.swing.JFrame {
     //-------------------------------BOTON_INICIO-----------------------------------------------------
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String nombre = jTextField1.getText();
+        String correo = jTextField1.getText();
         String contrasena = jTextField2.getText();
         
         if (b.crear_conexion()){
             try {
-                Usuario usu = b.buscarNombreUsuario(nombre);
-                if (usu.nombre == nombre || usu.contraseña == contrasena){
-                    Ver_Productos vps = new Ver_Productos();
+                Usuario usu = b.buscarNombreUsuario_inicio(correo);
+                if (usu.correo == correo || usu.contraseña == contrasena){
+                    Ver_Productos vps = new Ver_Productos(usu);
                     vps.setVisible(true);
                     this.setVisible(false);
                 }else{
